@@ -19,7 +19,7 @@ pygame.display.set_caption("One Bullet")
 
 ''' GAME OBJECT SETUPS '''
 #loads in the sprite for the Player
-player_sprite = pygame.image.load("arrow.png")
+player_sprite = pygame.image.load("main-stuff/arrow.png")
 #creates the player with the sprite
 player = pm.Player(player_sprite, screen)
 
