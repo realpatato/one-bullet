@@ -4,14 +4,16 @@
 import pygame
 #needed for player object
 import player_manager as pm
+#needed for wall objects
+import wall as w
 
 ''' PYGAME SETUP '''
 #starts the module
 pygame.init()
 
 #variables for screen size
-screen_width = 1000
-screen_height = 500
+screen_width = 1200
+screen_height = 600
 #creates the screen
 screen = pygame.display.set_mode((screen_width, screen_height))
 #sets the screen caption
@@ -23,6 +25,16 @@ player_sprite = pygame.image.load("main-stuff/arrow.png")
 #creates the player with the sprite
 player = pm.Player(player_sprite, screen)
 
+wall_sprite = pygame.image.load("main-stuff/sprites/120x120PLACEHOLDER.png")
+#creates walls
+wall_tiles = [w.Wall_Tile(wall_sprite, screen, (0, 0)), w.Wall_Tile(wall_sprite, screen, (0, 120))]
+'''
+for r in range(3):
+    for c in range(3):
+        wall_tile = w.Wall_Tile(wall_sprite, screen, (r*40, c*40))
+        wall_tiles.append(wall_tile)
+'''
+        
 ''' GAME LOOP SET UP '''
 #clock for frame rate management
 clock = pygame.time.Clock()
@@ -49,10 +61,13 @@ while keep_playing:
     screen.fill((0, 0, 0))
 
     if player._bullet != None:
-        player._bullet.bullet_movement()
+        player._bullet.bullet_movement(wall_tiles)
         player._bullet.draw_bullet()
 
     player.draw_self()
+
+    for wall in wall_tiles:
+        wall.draw_self()
 
     #update the screen
     pygame.display.update()

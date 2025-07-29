@@ -32,8 +32,10 @@ class Player:
     
     def update_rect(self):
         ''' Updates the rect of the player after a rotation '''
+        self._collison_rect = self._sprite.get_rect()
+        self._collison_rect.center = (self._surface.get_width()/2, self._surface.get_height()/2)
         self._rect = self._draw_sprite.get_rect()
-        self._rect.center = (500, 250)
+        self._rect.center = (self._surface.get_width()/2, self._surface.get_height()/2)
     
     def spawn_bullet(self):
         ''' Spawns a bullet '''
@@ -41,4 +43,5 @@ class Player:
 
     def draw_self(self):
         ''' Draws the player to the screen '''
+        pygame.draw.rect(self._surface, (255, 0, 0), self._collison_rect)
         self._surface.blit(self._draw_sprite, (self._rect.x, self._rect.y))
